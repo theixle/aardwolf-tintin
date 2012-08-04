@@ -1,0 +1,18 @@
+Development ToDo List
+
+Improve the installation and setup phase.
+	- installation script
+	- optional install of tintin/tmux
+	- basic map with some newbie areas mapped
+
+Provide some in-game (in-client) commands for help/docs and control.
+	- map control
+	- map custom exits, portals, speedwalking (paths.tin)
+	- channel gagging
+
+Add more commenting to the settings.
+
+Separate the "core" components from the "plug-ins"
+	- .tin vs .tt and/or directories
+
+Remove redundancy, fix bugs, add functionality to settings.
