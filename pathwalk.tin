@@ -17,8 +17,8 @@
 #NOP		I would highly recommend using more complete gmcp data capturing script(s)
 #NOP		such as these:
 #NOP			
-#NOP			http://theixle.dyndns.org/aardtin/aardwolf+tintin/gmcp.tin
-#NOP			http://theixle.dyndns.org/aardtin/aardwolf+tintin/zzGMCP_to_stat.tin
+#NOP			http://code.google.com/p/aardwolf-tintin/source/browse/gmcp.tin
+#NOP			http://code.google.com/p/aardwolf-tintin/zzGMCP_to_stat.tin
 #NOP
 #NOP		Otherwise, you will need to do something like this:
 #NOP
