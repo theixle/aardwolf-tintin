@@ -1,0 +1,59 @@
+#ALIAS {||gmcp_prompt_statmon}
+{
+	#variable tier {$GMCP[CHAR][BASE][tier]};
+	#math {tier_level} {$tier*10 + $current_level};
+	#variable str {$GMCP[CHAR][STATS][str]};
+	#variable base_str {$GMCP[CHAR][MAXSTATS][maxstr]};
+	#variable int {$GMCP[CHAR][STATS][int]};
+	#variable base_int {$GMCP[CHAR][MAXSTATS][maxint]};
+	#variable wis {$GMCP[CHAR][STATS][wis]};
+	#variable base_wis {$GMCP[CHAR][MAXSTATS][maxwis]};
+	#variable dex {$GMCP[CHAR][STATS][dex]};
+	#variable base_dex {$GMCP[CHAR][MAXSTATS][maxdex]};
+	#variable con {$GMCP[CHAR][STATS][con]};
+	#variable base_con {$GMCP[CHAR][MAXSTATS][maxcon]};
+	#variable luck {$GMCP[CHAR][STATS][luck]};
+	#variable base_luck {$GMCP[CHAR][MAXSTATS][maxluck]};
+	#math hp_percent {((1.00*$GMCP[CHAR][VITALS][hp]) / $GMCP[CHAR][MAXSTATS][maxhp])*100};
+	#math mana_percent {((1.00*$GMCP[CHAR][VITALS][mana])/$GMCP[CHAR][MAXSTATS][maxmana])*100};
+	#math moves_percent {((1.00*$GMCP[CHAR][VITALS][moves])/$GMCP[CHAR][MAXSTATS][maxmoves])*100};
+	#variable hr {$GMCP[CHAR][STATS][hr]};
+	#variable dr {$GMCP[CHAR][STATS][dr]};
+	#variable position {$GMCP[CHAR][STATUS][pos]};
+	#variable hp {$GMCP[CHAR][VITALS][hp]};
+	#variable maxhp {$GMCP[CHAR][MAXSTATS][maxhp]};
+	#variable mana {$GMCP[CHAR][VITALS][mana]};
+	#variable maxmana {$GMCP[CHAR][MAxSTATS][maxmana]};
+	#variable moves {$GMCP[CHAR][VITALS][moves]};
+	#variable maxmoves {$GMCP[CHAR][MAXSTATS][maxmoves]};
+	#variable gold {$GMCP[CHAR][WORTH][gold]};
+	#variable qp {$GMCP[CHAR][WORTH][qp]};
+	#variable tp {$GMCP[CHAR][WORTH][tp]};
+	#variable align {$GMCP[CHAR][STATUS][align]};
+	#variable tnl {$GMCP[CHAR][STATUS][tnl]};
+	#variable current_level {$GMCP[CHAR][STATUS][level]};
+	#variable pos_number {$GMCP[CHAR][STATUS][state]};
+	#variable mob_fighting {$GMCP[CHAR][STATUS][enemy]};
+	#variable enemy_hp {$GMCP[CHAR][STATUS][enemypct]};
+	#variable hunger {$GMCP[CHAR][STATUS][hunger]};
+	#variable thirst {$GMCP[CHAR][STATUS][thirst]};
+	#format {movecolor} {%c} {light yellow};
+	#if {$hp_percent == 0.00}
+	{
+		protocol gmcp sendchar
+	};
+	#variable {prompt} {<120>$hp_percent HP <150>| <140>$mana_percent MANA <150>| $movecolor$moves_percent MV};
+	#if {$pos_number == 8}
+	{
+		#variable fighting y;
+		#variable {prompt} {$prompt <150>| <110>Enemy $enemy_hp}
+	};
+	#else
+	{
+		#variable fighting n
+	};
+	#variable {prompt} {$prompt<099>};
+	#showme {$prompt} {2}
+}
+{5}
+

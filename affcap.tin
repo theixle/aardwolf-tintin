@@ -1,0 +1,59 @@
+#class affcap kill
+#class affcap open
+
+/*
+	This script will capture spell output, gag it, and put it in a file called 'affects' in your $dir.
+	Todo: have it sort the list and display in descending order from longest duration to shortest
+*/
+
+#action {^You are affected by the following:$} 
+{
+	#show <179>Capturing Affects List<099>;
+	#line gag;
+	#list affects clear;
+	#var aff_count 1;
+	#line log {$dir/affects} {<179>--Affects--<099>}
+}
+
+#action {^Spell   : %* \(%d:%d\)$} 
+{
+	#line gag;
+	#list affects[$aff_count] add {%1;00;%2;%3};
+	#math aff_count {$aff_count + 1}
+}
+
+#action {^Spell   : %* \(%d:%d:%d\)$}
+{
+	#line gag;
+	#list affects[$aff_count] add {%1;%2;%3;%4};
+	#math aff_count {$aff_count + 1}
+}
+
+#action {^You are affected by %d skills and %d spells.$} 
+{
+	#foreach $affects[] {x} 
+	{
+		#if {$affects[$x][2]==0 && $affects[$x][3]<2}
+		{
+			#line log {$dir/affects} {<119>$affects[$x][2]:$affects[$x][3]:$affects[$x][4] : $affects[$x][1]<099>}
+		};
+		#elseif {$affects[$x][2]==0 && $affects[$x][3]<5}
+		{
+			#line log {$dir/affects} {<139>$affects[$x][2]:$affects[$x][3]:$affects[$x][4] : $affects[$x][1]<099>}
+		};
+		#elseif {$affects[$x][2]==0 && $affects[$x][3]<10}
+		{
+			#line log {$dir/affects} {<169>$affects[$x][2]:$affects[$x][3]:$affects[$x][4] : $affects[$x][1]<099>}
+		};
+		#else
+		{
+			#line log {$dir/affects} {<029>$affects[$x][2]:$affects[$x][3]:$affects[$x][4] : $affects[$x][1]<099>}
+		}
+
+
+	};
+	#line log {$dir/affects} {\nSkills <029>%1  <099>Spells <029>%2<099>\n};
+}
+
+
+#class affcap close
