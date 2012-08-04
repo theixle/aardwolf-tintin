@@ -10,6 +10,8 @@
 #VARIABLE         {base_wis}  {30}
 #VARIABLE         {campaign}  {0}
 #VARIABLE         {chanrec}  {auction}
+#VARIABLE         {CLIENT_NAME} {Aardwolf-Tintin}
+#VARIABLE         {CLIENT_VERSION} {1.01}
 #VARIABLE         {con}  {17}
 #VARIABLE         {curr_time}  {1318772334}
 #VARIABLE         {current_level}  {1}
