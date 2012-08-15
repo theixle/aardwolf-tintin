@@ -68,7 +68,14 @@ read in optional settings as required
 
 Displaying:
 -----------
-Setup panes in tmux or multiple terminal windows and use the tail command (ex. tail -fs .1 minimap) 
-on whichever log file you wish. 
+Linux/Unix:
+	Setup panes in Tmux or multiple terminal windows and use the tail command (ex. tail -fs .1 minimap) 
+	on whichever log file you wish. 
+
+Mac OSX:
+	See link below for instructions setting up Tmux.
+	https://blogs.oracle.com/unixben/entry/install_tmux_on_mac_os
+
+
 *NOTE* For the minimap file you will need to set the size of the window to match the output from the mud.
 For a typical 10pt font a size of 30columns by 21rows should be close.

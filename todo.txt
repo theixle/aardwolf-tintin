@@ -16,3 +16,8 @@ Separate the "core" components from the "plug-ins"
 	- .tin vs .tt and/or directories
 
 Remove redundancy, fix bugs, add functionality to settings.
+
+Change reports from masaki theme to neutral
+
+Update mapping in gmcp.tin to set room_terrain from GMCP values
+ - eventually expand this to color rooms based on terrain
