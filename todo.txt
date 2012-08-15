@@ -10,7 +10,8 @@ Provide some in-game (in-client) commands for help/docs and control.
 	- map custom exits, portals, speedwalking (paths.tin)
 	- channel gagging
 
-Add more commenting to the settings.
+Add more commenting to the settings. 
+Clean up the formatting.
 
 Separate the "core" components from the "plug-ins"
 	- .tin vs .tt and/or directories
@@ -21,3 +22,6 @@ Change reports from masaki theme to neutral
 
 Update mapping in gmcp.tin to set room_terrain from GMCP values
  - eventually expand this to color rooms based on terrain
+
+Add revised lvladd aliases and fix afind,vfind,rfind,mfind,hfind
+
