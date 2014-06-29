@@ -6,10 +6,35 @@
 #NOP    ############################################################################################
 
 #var {portals}
-{
-        {1}{{zone}{aylor}{name}{garbage}{vnum}{32418}{cmd}{get garbage from $portalbag;hold garbage;enter;hold wad;put garbage in $portalbag}}
-        {2}{{zone}{petstore}{name}{collar}{vnum}{995}{cmd}{get collar from $portalbag;hold collar;enter;hold wad;put collar in $portalbag}}
-        {3}{{zone}{amusement}{name}{amulet}{vnum}{29364}{cmd}{get amulet from $portalbag;hold amulet;enter;hold wad;put amulet in $portalbag}}
+{      
+        {1}    
+        {      
+          {lvl}{1}
+          {zone}{sendhian}
+          {name}{922303584}
+          {vnum}{20286}
+          {cmd}{get 922303584 from $$portalbag;hold 922303584;enter;hold $$portal;put 922303584 in $$portalbag}
+        }
+        {2}
+        {
+          {zone}{aylor}
+          {name}{garbage}
+          {vnum}{32418}
+          {cmd}{get garbage from $$portalbag;hold garbage;enter;hold $$portal;put garbage in $$portalbag}
+        }
+        {3}
+        {
+          {zone}{petstore}
+          {name}{collar}
+          {vnum}{995}
+          {cmd}{get collar from $$portalbag;hold collar;enter;hold $$portal;put collar in $$portalbag}
+        }
+        {4}
+        {
+          {zone}{amusement}
+          {name}{amulet}
+          {vnum}{29364}
+          {cmd}{get amulet from $$portalbag;hold amulet;enter;hold $$portal;put amulet in $$portalbag}}
 }
 
 #NOP    ###########################################################################
