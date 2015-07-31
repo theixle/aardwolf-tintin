@@ -1,0 +1,32 @@
+prompt
+drink goblet
+drink
+score
+
+debug on
+c 'create water
+#echo $quest[timer]
+debug off
+rest
+stand
+lookl
+look
+porthome
+d
+eq
+wear all
+wear serenity
+wear earth
+compare serenity
+put serenity backpack
+look in bag
+unkeep bag
+e
+drop bag
+sac all
+drop thieves
+drop patch
+#10 c 'remove curse'
+drop all
+i
+quit

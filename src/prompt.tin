@@ -1,0 +1,39 @@
+#FUNCTION {percent_color}
+{
+    #var {percent_store} {};
+    #if {%1 > 80} { #format {percent_store} {%c%d<099>} {bold green} {%1} };
+    #if {%1 < 80 && %1 > 30} { #format {percent_store} {%c%d<099>} {bold yellow} {%1} };
+    #if {%1 < 30} { #format {percent_store} {%c%d<099>} {bold red} {%1} };
+    #return $percent_store;
+}
+
+#ALIAS {prompt_statmon}
+{
+	#math hp_percent {((1.00*$hp) / $maxhp)*100};
+	#math mana_percent {((1.00*$mana) / $maxmana)*100};
+	#math moves_percent {((1.00*$moves) / $maxmoves)*100};
+
+        #var {c_hp_percent} {@percent_color{$hp_percent}};
+        #var {c_mana_percent} {@percent_color{$mana_percent}};
+        #var {c_moves_percent} {@percent_color{$moves_percent}};
+
+        #var {hp_prompt} {<039>$hp<099>/<139>$maxhp<099>hp ($c_hp_percent%)};
+        #var {mana_prompt} {<069>$mana<099>/<169>$maxmana<099>m ($c_mana_percent%)};
+        #var {moves_prompt} {<049>$moves<099>/<149>$maxmoves<099>mv ($c_moves_percent%)};
+
+        #var {prompt} {<$hp_prompt | $mana_prompt | $moves_prompt>};
+        #if {$state == 8}
+        { 
+            #var {c_enemy_health} {@percent_color{$enemy_health}};
+            #var {battleprompt} {<119>$enemy<099>: $c_enemy_health%};
+            #var {prompt} {$prompt $battleprompt};
+        };
+        #elseif {$state == 9 || $state == 11} { #var {prompt} {$prompt <159>RESTING<099>}};
+	#showme {$prompt} {1};
+
+        #var {c_hunger} {@percent_color{$hunger}};
+        #var {c_thirst} {@percent_color{$thirst}};
+        #var {top_prompt} {[Quest: <169>$quest[timer]<099> | TNL: <059>$tnl<099> | Align: <149>$align<099> | Hunger/Thirst: $c_hunger%/$c_thirst%]};
+        #showme {$top_prompt} {2};
+};
+

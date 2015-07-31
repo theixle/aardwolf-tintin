@@ -1,0 +1,72 @@
+#class quest kill
+#class quest open
+
+
+#ALIAS {start_quest_timer}
+{
+    #var {quest[timer]} {%1};
+    #ticker {quest[timer]}
+    {
+        #math {quest[timer]} {$quest[timer] - 1};
+        #if {$quest[timer] == 0}
+        {
+            #untick {quest[timer]};
+            #var {quest[timer]} {<cfa>READY<099>};
+        };
+        prompt_statmon;
+    } {60}
+};
+
+
+#EVENT {IAC SB GMCP comm.quest IAC SE}
+{
+    #if {$debug} { #showme {%1} };
+    #var {GMCPDATA[COMM][QUEST]} {%0};
+
+    #if {"$GMCPDATA[COMM][QUEST][action]" == "ready"}
+    {
+        #send {$repchan @W\{-=@RQuest Time@W=-\}@w};
+        #var {quest[timer]} {<129>READY<099>};
+        #bell;
+    };
+    #elseif {"$GMCPDATA[COMM][QUEST][action]" == "start"}
+    {
+        #format {quest[start]} {%T};
+        #var {quest[timer]} {<fca>ACTIVE<099>};
+        #var {quest[room]} {$GMCPDATA[COMM][QUEST][room]};
+        #var {quest[area]} {$GMCPDATA[COMM][QUEST][area]};
+        #var {quest[target]} {$GMCPDATA[COMM][QUEST][targ]};
+
+        #send {$repchan @Y[@RQuest Requested@Y]@w: @YTarget@w=@R$quest[target]@w. @YRoom@w=@R$quest[room]@w. @YArea@w=@R$quest[area]@w.};
+    };
+    #elseif {"$GMCPDATA[COMM][QUEST][action]" == "fail"}
+    {
+        #send {$repchan @W\{-=@RQuest Failed@W=-\}@w};
+        #var {quest} {};
+
+        start_quest_timer 30;
+    };
+    #elseif {"$GMCPDATA[COMM][QUEST][action]" == "comp"}
+    {
+        #format {quest[end]} {%T};
+        #math {quest[time]} {$quest[end] - $quest[start]};
+        #var {quest[trivia]} {$GMCPDATA[COMM][QUEST][tp]};
+        #var {quest[pracs]} {$GMCPDATA[COMM][QUEST][pracs]};
+        #var {quest[trains]} {$GMCPDATA[COMM][QUEST][trains]};
+        #var {quest[qp]} {$GMCPDATA[COMM][QUEST][totqp]};
+
+        #send {$repchan @R[@YQuest Completed@R] @Y[@WQp: @R$quest[qp]@Y] $quest[time] secs @Y[@WBonus: @R $quest[pracs] / $quest[train] / $quest[trivia]@Y]@w};
+        #var {quest} {};
+
+        start_quest_timer 30;
+    };
+    #elseif {"$GMCP[COMM][QUEST][target]" == "killed"}
+    {
+        #send {$repchan @W\{-=@RQuest Target Killed@W=-\}@w};
+        #var {quest[timer]} {<169>RETURN<099>};
+    };
+
+    prompt_statmon;
+}
+
+#class quest close

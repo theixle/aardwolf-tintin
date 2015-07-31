@@ -1,0 +1,48 @@
+#class char kill
+#class char open
+
+
+#event {IAC SB GMCP char.vitals IAC SE}
+{
+    #if {$debug} { #showme %1 };
+    #var {GMCPDATA[CHAR][VITALS]} {%0};
+    #var {hp} {$GMCPDATA[CHAR][VITALS][hp]};
+    #var {mana} {$GMCPDATA[CHAR][VITALS][mana]};
+    #var {moves} {$GMCPDATA[CHAR][VITALS][moves]};
+    prompt_statmon;
+}
+
+#event {IAC SB GMCP char.maxstats IAC SE}
+{
+	#if {$debug} { #showme %1 };
+	#var {GMCPDATA[CHAR][MAXSTATS]} {%0};
+        #var {maxhp} {$GMCPDATA[CHAR][MAXSTATS][maxhp]};
+        #var {maxmana} {$GMCPDATA[CHAR][MAXSTATS][maxmana]};
+        #var {maxmoves} {$GMCPDATA[CHAR][MAXSTATS][maxmoves]};
+        #nop Actual stats below are yet unusued.
+        #var {maxstr} {$GMCPDATA[CHAR][MAXSTATS][maxstr]};
+        #var {maxint} {$GMCPDATA[CHAR][MAXSTATS][maxint]};
+        #var {maxwis} {$GMCPDATA[CHAR][MAXSTATS][maxwis]};
+        #var {maxdex} {$GMCPDATA[CHAR][MAXSTATS][maxdex]};
+        #var {maxcon} {$GMCPDATA[CHAR][MAXSTATS][maxcon]};
+        #var {maxluck} {$GMCPDATA[CHAR][MAXSTATS][maxluck]};
+        prompt_statmon;
+}
+
+#event {IAC SB GMCP char.status IAC SE}
+{
+	#variable {GMCPDATA[CHAR][STATUS]} {%0};
+	#if {$debug} {#showme %1};
+        #var {level} {$GMCPDATA[CHAR][STATUS][level]};
+        #var {tnl} {$GMCPDATA[CHAR][STATUS][tnl]};
+        #var {hunger} {$GMCPDATA[CHAR][STATUS][hunger]};
+        #var {thirst} {$GMCPDATA[CHAR][STATUS][thirst]};
+        #var {align} {$GMCPDATA[CHAR][STATUS][align]};
+        #var {state} {$GMCPDATA[CHAR][STATUS][state]};
+        #var {position} {$GMCPDATA[CHAR][STATUS][pos]};
+        #var {enemy} {$GMCPDATA[CHAR][STATUS][enemy]};
+        #var {enemy_health} {$GMCPDATA[CHAR][STATUS][enemypct]};
+        prompt_statmon;
+}
+
+#class char close

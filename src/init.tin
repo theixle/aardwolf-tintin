@@ -1,0 +1,38 @@
+#class init kill
+#class init open
+
+#ALIAS {do_on_connect}
+{
+    protocol gmcp sendchar;
+    quest time;
+};
+
+#ACTION {^############# Reconnecting to Game #############$} {do_on_connect}
+#ACTION {^Welcome to Aardwolf. May your adventures be mystical, challenging and rewarding.} {do_on_connect}
+
+#ACTION {^You do not have to wait to go on another quest.$} 
+{ 
+    #var {quest[timer]} {<129>READY<099>};
+    prompt_statmon;
+    #class init kill
+}
+#ACTION {^There are %d minutes remaining until you can go on another quest.$}
+{
+    start_quest_timer %1;
+    prompt_statmon;
+    #class init kill
+}
+#ACTION {^There is less than a minute remaining until you can go on another quest.$}
+{
+    start_quest_timer 1;
+    prompt_statmon;
+    #class init kill
+}
+#ACTION {^Time left for current quest: %d$}
+{
+    #var {quest[timer]} {<fca>ACTIVE<099>};
+    prompt_statmon;
+    #class init kill
+}
+
+#class init close

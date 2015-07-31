@@ -1,0 +1,61 @@
+#class gmcp kill
+#class gmcp open
+
+
+#format IAC  %a 255
+#format DONT %a 254
+#format DO   %a 253
+#format WONT %a 252
+#format WILL %a 251
+#format SB   %a 250
+#format SE   %a 240
+
+#format GMCP %a 201
+
+#alias {debug {on|off}}
+{
+	#if {"%1" == "on"} { #variable debug 1 };
+	#else { #variable debug 0 };
+	#nop;
+}
+
+#event {IAC SB GMCP comm.channel IAC SE}
+{
+	#if {$debug} { #showme %1 };
+	#var {GMCPDATA[COMM][CHATLOGGER]} {%0};
+	#if {"$GMCPDATA[COMM][CHATLOGGER][chan]" != "mobsay"}
+	{
+		#line log {$dir/logs/channel.log} {$GMCPDATA[COMM][CHATLOGGER][msg]};
+	};
+}
+
+#nop Start up GMCP connection with the server
+#event {IAC WILL GMCP}
+{
+	#send {$IAC$DO$GMCP\};
+	#send {$IAC$SB$GMCP Core.Hello { "client": "$CLIENT_NAME", "version": "$CLIENT_VERSION" } $IAC$SE\};
+	#send {$IAC$SB$GMCP Core.Supports.Set [ "Room 1", "Char 1", "Core 1", "Comm 1", "Debug 1", "Group 1" ] $IAC$SE\}
+}
+
+#event {PROGRAM START}
+{
+	#variable CLIENT_NAME %0;
+	#variable CLIENT_VERSION %1;
+}
+
+#nop Write out command history and variable class on disconnect
+#event  {SESSION DISCONNECTED} 
+{
+	#history write {$dir/logs/history.log};
+}
+
+#event	{SESSION CONNECTED} 
+{
+	$name;
+	$password;
+	#unvar name;
+	#unvar password;
+	#history read {$dir/logs/history.log};
+}
+
+#class gmcp close

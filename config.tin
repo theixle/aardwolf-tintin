@@ -1,0 +1,19 @@
+#VARIABLE {name} {username};
+#VARIABLE {password} {password};
+#VARIABLE {dir} {.};
+
+#VARIABLE {repchan} {gt};
+#VARIABLE {bag} {pentagram};
+
+#READ {$dir/src/prompt.tin};
+#READ {$dir/src/gmcp.tin};
+#READ {$dir/src/char.tin};
+#READ {$dir/src/quest.tin};
+#READ {$dir/src/init.tin};
+
+#READ {$dir/aliases.tin};
+#READ {$dir/actions.tin};
+
+#SESSION {aard} {aardmud.org} {4000};
+
+#SPLIT {0} {3};

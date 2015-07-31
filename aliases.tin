@@ -1,0 +1,9 @@
+#ALIAS {porthome}
+{
+    get portal $bag;
+    wear portal;
+    enter;
+    remove portal;
+    put portal $bag;
+    wear all;
+};
