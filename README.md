@@ -1,4 +1,4 @@
-### TinTin++ Settings for Aardwolf MUD
+# TinTin++ Settings for Aardwolf MUD
 
 ## Setup:
 * Clone the repository
