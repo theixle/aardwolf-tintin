@@ -1,19 +1,28 @@
-#VARIABLE {name} {username};
-#VARIABLE {password} {password};
+#VARIABLE {name} {};
+#VARIABLE {password} {};
 #VARIABLE {dir} {.};
 
 #VARIABLE {repchan} {gt};
 #VARIABLE {bag} {pentagram};
 
+#CONFIG {LOG} {RAW}
+#LOG APPEND {$dir/logs/active.log}
+
 #READ {$dir/src/prompt.tin};
 #READ {$dir/src/gmcp.tin};
 #READ {$dir/src/char.tin};
 #READ {$dir/src/quest.tin};
+#READ {$dir/src/minimap.tin};
 #READ {$dir/src/init.tin};
 
 #READ {$dir/aliases.tin};
 #READ {$dir/actions.tin};
 
+#ACTION {{^\{chan ch={answer|question|wangrp|gossip|barter|auction|nobletalk|sports|gclan|newbie|curse|market}\}%2$}} {#line gag};
+#ACTION {{\{stats\}}} {#line gag};
+
 #SESSION {aard} {aardmud.org} {4000};
 
 #SPLIT {0} {3};
+#SUB 	{\{chan ch=%*\}} {};
+

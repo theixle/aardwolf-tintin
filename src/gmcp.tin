@@ -14,9 +14,25 @@
 
 #alias {debug {on|off}}
 {
-	#if {"%1" == "on"} { #variable debug 1 };
-	#else { #variable debug 0 };
-	#nop;
+    #if {"%1" == "on"} { #variable debug 1 };
+    #else { #variable debug 0 };
+    #showme { Debug is <139>$debug<099> };
+    #nop;
+}
+
+#alias {repopwatch {on|off}}
+{
+    #if {"%1" == "on"} { #variable repop 1 };
+    #else { #variable repop 0 };
+    #showme { Repopwatch is <139>$repop<099> };
+    #nop;
+}
+
+#alias {{^check repop$}}
+{
+    #format {timestamp} {%T};
+    #math {repop_time} {($last_repop+606)-$timestamp};
+    #send {$repchan @CNext repop@w: @R$repop_time @Wseconds.@w};
 }
 
 #event {IAC SB GMCP comm.channel IAC SE}
@@ -27,6 +43,18 @@
 	{
 		#line log {$dir/logs/channel.log} {$GMCPDATA[COMM][CHATLOGGER][msg]};
 	};
+}
+
+#event {IAC SB GMCP comm.repop IAC SE}
+{
+        #if {$debug} { #showme %1 };
+	#var {GMCP[COMM][REPOP]} {%0};
+
+        #format {last_repop} {%T};
+	#format {time} {%t} {%H:%M:%S};
+	#send {$repchan @WRepop @w= @r$GMCP[COMM][REPOP][zone]@w @@ @r$time};
+	#var time {};
+	#nop;
 }
 
 #nop Start up GMCP connection with the server
@@ -47,6 +75,8 @@
 #event  {SESSION DISCONNECTED} 
 {
 	#history write {$dir/logs/history.log};
+        #line log {$dir/logs/minimap.log} {\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n};
+        #line log {$dir/logs/mobs.log} {\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n};
 }
 
 #event	{SESSION CONNECTED} 

@@ -7,3 +7,21 @@
     put portal $bag;
     wear all;
 };
+
+#ALIAS {^.note %*}
+{
+    #line {log} {$dir/logs/notes.log} {%1};
+};
+
+#ALIAS {^.newpage$}
+{
+    #5 #line {log} {$dir/logs/notes.log} {\n\n\n\n};
+};
+
+#ALIAS {^.colors$}
+{
+    #forall {0;1;2;3;4;5;6;7;8;9}
+    {
+        #showme {<0&09>\<0&09\><099> <1&09>\<1&09\><099>};
+    };
+};

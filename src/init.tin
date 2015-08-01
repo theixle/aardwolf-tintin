@@ -4,6 +4,7 @@
 #ALIAS {do_on_connect}
 {
     protocol gmcp sendchar;
+    map;
     quest time;
 };
 

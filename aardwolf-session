@@ -9,6 +9,9 @@
 #tmux splitw -v -l 37 'tt++ -G /home/br4n/documents/MUD/AardWolf/aardwolf/aardwolf/setup.tin'
 #tmux send-keys -t 0 'exit' Enter
 
-tmux split-window -v -p 80 'tail -fs .1 /home/br4n/documents/MUD/AardWolf/aardwolf/aardwolf/channel.log'
+tmux split-window -v -p 80 'tail -fs .1 /home/br4n/documents/MUD/AardWolf/aardwolf-tintin/logs/channel.log'
 tmux swap-pane -Dd
-tmux send-keys 'tt++ -G /home/br4n/documents/MUD/AardWolf/aardwolf/aardwolf/setup.tin' Enter
+tmux split-window -h -p 20 'tail -fs .1 /home/br4n/documents/MUD/AardWolf/aardwolf-tintin/logs/minimap.log'
+tmux split-window -v -p 50 'tail -fs .1 /home/br4n/documents/MUD/AardWolf/aardwolf-tintin/logs/notes.log'
+tmux select-pane -L
+tmux send-keys 'tt++ -G /home/br4n/documents/MUD/AardWolf/aardwolf-tintin/config.tin' Enter

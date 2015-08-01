@@ -1,0 +1,61 @@
+#class minimap kill
+#class minimap open
+
+#ALIAS {get_minimap}
+{
+    #ACTION {~%0}
+    {
+        #line log {$dir/logs/minimap.log} {%0};
+        #line gag;
+    } {10}
+}
+
+#ALIAS {get_chars}
+{
+    #ACTION {~%0}
+    {
+        #line log {$dir/logs/mobs.log} {%0};
+    } {10}
+}
+
+#ACTION {^<MAPEND>$}
+{
+        #unaction {~%%0} {};
+	#line gag;
+} {1}
+
+#ACTION {^<MAPSTART>$}
+{
+        #line log {$dir/logs/minimap.log} {\n\r\n\r};
+        get_minimap;
+	#line gag;
+} {1}
+
+#ACTION {{^\{roomchars\}}} 
+{
+	#line log {$dir/logs/mobs.log} {\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n};
+        get_chars;
+	#line gag;
+}
+
+#ACTION {{^\{/roomchars\}$}} 
+{
+        #unaction {~%%0} {};
+	#line log {$dir/logs/mobs.log} {\n\r};
+	#line gag;
+}
+
+#ACTION {{^\{roomobjs\}}} 
+{
+        get_chars;
+	#line gag;
+}
+
+#ACTION {{^\{/roomobjs\}$}} 
+{
+        #unaction {~%%0} {};
+	#line log {$dir/logs/mobs.log} {\n\r};
+	#line gag;
+}
+
+#class minimap close
