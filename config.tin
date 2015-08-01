@@ -18,7 +18,7 @@
 #READ {$dir/aliases.tin};
 #READ {$dir/actions.tin};
 
-#ACTION {{^\{chan ch={answer|question|wangrp|gossip|barter|auction|nobletalk|sports|gclan|newbie|curse|market}\}%2$}} {#line gag};
+#ACTION {{^\{chan ch={answer|question|wangrp|tech|gossip|barter|auction|nobletalk|sports|gclan|newbie|curse|market}\}%2$}} {#line gag};
 #ACTION {{\{stats\}}} {#line gag};
 
 #SESSION {aard} {aardmud.org} {4000};

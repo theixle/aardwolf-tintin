@@ -26,14 +26,14 @@
 
 #ACTION {^<MAPSTART>$}
 {
-        #line log {$dir/logs/minimap.log} {\n\r\n\r};
+        #line log {$dir/logs/minimap.log} {\n\n\n\n\n\n};
         get_minimap;
 	#line gag;
 } {1}
 
 #ACTION {{^\{roomchars\}}} 
 {
-	#line log {$dir/logs/mobs.log} {\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n};
+	#line log {$dir/logs/mobs.log} {\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n};
         get_chars;
 	#line gag;
 }

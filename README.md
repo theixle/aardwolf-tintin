@@ -31,6 +31,7 @@
 * repopwatch on|off - toggles announcing of repops in $repchan
 * .note *message here* - adds *message* to notes.log (bottom right window)
 * .newpage - clears the note screen, providing a fresh page
+* cpcheck - print list of campaign targets to note window, sorted by area
 
 
 The actions.tin and aliases.tin files are a place for your personal triggers and aliases. 

@@ -1,0 +1,7 @@
+#!/bin/bash
+tmux split-window -h -p 22 'tail -fs .1 /home/br4n/documents/MUD/AardWolf/aardwolf-tintin/logs/minimap.log'
+tmux split-window -v -p 58 'tail -fs .1 /home/br4n/documents/MUD/AardWolf/aardwolf-tintin/logs/notes.log'
+tmux select-pane -L
+tmux split-window -v -p 80 'tail -fs .1 /home/br4n/documents/MUD/AardWolf/aardwolf-tintin/logs/channel.log'
+tmux swap-pane -Ud
+tmux send-keys 'tt++ -G /home/br4n/documents/MUD/AardWolf/aardwolf-tintin/config.tin' Enter

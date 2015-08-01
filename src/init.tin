@@ -3,9 +3,10 @@
 
 #ALIAS {do_on_connect}
 {
-    protocol gmcp sendchar;
     map;
+    protocol gmcp sendchar;
     quest time;
+    look;
 };
 
 #ACTION {^############# Reconnecting to Game #############$} {do_on_connect}

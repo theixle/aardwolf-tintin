@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Clear Username and Password
+sed -i '1,2s/{\(.*\)} {\(.*\)}\;$/{\1} {}\;/' config.tin
+echo "Clearing credentials..."
+
+# Empty logs and history
+for f in logs/*.log
+do
+    rm $f
+    touch $f
+    echo "Clearing $f..."
+done
+echo "Done - ready to commit."

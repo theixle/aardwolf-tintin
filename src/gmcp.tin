@@ -75,8 +75,6 @@
 #event  {SESSION DISCONNECTED} 
 {
 	#history write {$dir/logs/history.log};
-        #line log {$dir/logs/minimap.log} {\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n};
-        #line log {$dir/logs/mobs.log} {\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n};
 }
 
 #event	{SESSION CONNECTED} 

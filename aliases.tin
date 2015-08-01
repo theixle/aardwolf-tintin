@@ -25,3 +25,34 @@
         #showme {<0&09>\<0&09\><099> <1&09>\<1&09\><099>};
     };
 };
+
+#ALIAS {cpcheck}
+{
+    .newpage;
+    #var {cplog} {1};
+    #line {log} {$dir/logs/notes.log} {<199>-==[<169>Campaign Targets<199>]==-<099>\n};
+    campaign check;
+};
+
+#ACTION {^You still have to kill %. %* (%*)$}
+{
+    #if {$cplog}
+    {
+        #list {cpareas} {find} {%3} {exists};
+        #if {$exists == 0} { #list {cpareas} {sort} {%3}; };
+        #list {%3} {sort} {%2};
+    };
+};
+
+#ACTION {left to finish this campaign.$}
+{
+    #var {cplog} {0};
+    #foreach {$cpareas[%*]} {name}
+    {
+        #line {log} {$dir/logs/notes.log} {<199>$name:<099>};
+        #foreach {${$name}[%*]} {target}
+        {
+            #line {log} {$dir/logs/notes.log} {      * <029>$target<099>};
+        }
+    }
+};
