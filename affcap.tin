@@ -6,7 +6,7 @@
 	Todo: have it sort the list and display in descending order from longest duration to shortest
 */
 
-#action {^You are affected by the following:$} 
+#action {^You are affected by the following skills/spells:$}
 {
 	#show <179>Capturing Affects List<099>;
 	#line gag;
@@ -15,17 +15,17 @@
 	#line log {$dir/affects} {<179>--Affects--<099>}
 }
 
-#action {^Spell   : %* \(%d:%d\)$} 
+#action {{^  (\S.*\S)\s+: \S.* \((\d+):(\d+)\)$}}
 {
 	#line gag;
-	#list affects[$aff_count] add {%1;00;%2;%3};
+	#list affects[$aff_count] add {%2;00;%3;%4};
 	#math aff_count {$aff_count + 1}
-}
+};
 
-#action {^Spell   : %* \(%d:%d:%d\)$}
+#action {{^  (\S.*\S)\s+: \S.* \((\d+):(\d+):(\d+)\)$}}
 {
 	#line gag;
-	#list affects[$aff_count] add {%1;%2;%3;%4};
+	#list affects[$aff_count] add {%2;%3;%4;%5};
 	#math aff_count {$aff_count + 1}
 }
 
