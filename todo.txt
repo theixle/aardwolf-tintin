@@ -25,3 +25,9 @@ Update mapping in gmcp.tin to set room_terrain from GMCP values
 
 Add revised lvladd aliases and fix afind,vfind,rfind,mfind,hfind
 
+Add full, but optional, Perl, Python, and Lua scripting environments.
+ - Use #sh to actually work these environments
+ - Will need to be on the user's system to work
+ - Aliases and callbacks for ease-of-use.
+ - Sample functionality: `#var {input_string} {test string};perl $input_string m/s.*g/` would return `st string`
+
