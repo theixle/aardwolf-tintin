@@ -1,6 +1,6 @@
 Intro:
 ------
-This project compliments of the Aardwolf character Cheezburger. 
+This project compliments of the Aardwolf character Cheezburger.
 This is a group of settings intended to be comparable to the base MUSHClient Aardwolf settings.
 It is intended for Linux users or those with access to a machine capable of running Tintin++.
 It should run under Wintin++ however performance may vary.
@@ -39,10 +39,10 @@ Channels:
  To configure which ones are shown in the main window:
  'tags channels on' to show tags around them
   -adjust general.tin list to change which channels are gagged
- 
+
 Mobs/Players in the room:
  'tags roomchars on' to start capturing people/mobs to the file 'chars'
- 
+
 Group Stats:
  Group stat logging is handled by gmcp.tt and logs to 'group' file once you are in a group
 
@@ -69,9 +69,9 @@ read in optional settings as required
 Displaying:
 -----------
 Linux/Unix:
-	Setup panes in Tmux or multiple terminal windows and use the tail command (ex. tail -fs .1 minimap) 
-	on whichever log file you wish. 
-
+	Setup panes in Tmux or multiple terminal windows and use the tail command (ex. tail -fs .1 minimap)
+	on whichever log file you wish.
+    Tmux: http://tmux.sourceforge.net/
 Mac OSX:
 	See link below for instructions setting up Tmux.
 	https://blogs.oracle.com/unixben/entry/install_tmux_on_mac_os
