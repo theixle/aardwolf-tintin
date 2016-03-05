@@ -37,6 +37,7 @@
 #ACTION {^<MAPSTART>$}
 {
 	#variable getmap 1;
+    #sys {echo "" > $dir/minimap};
 	#line gag
 }
 {1}
