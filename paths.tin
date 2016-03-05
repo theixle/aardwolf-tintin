@@ -7,50 +7,42 @@
 
 #var {portals}
 {      
-        {1}    
-        {      
-          {lvl}{1}
-          {zone}{sendhian}
-          {name}{922303584}
-          {vnum}{20286}
-          {cmd}{get 922303584 from $$portalbag;hold 922303584;enter;hold $$portal;put 922303584 in $$portalbag}
-        }
-        {2}
-        {
-          {lvl}{5}
-          {zone}{aylor}
-          {name}{garbage}
-          {vnum}{32418}
-          {cmd}{get garbage from $$portalbag;hold garbage;enter;hold $$portal;put garbage in $$portalbag}
-        }
-        {3}
-        {
-          {lvl}{10}
-          {zone}{petstore}
-          {name}{collar}
-          {vnum}{995}
-          {cmd}{get collar from $$portalbag;hold collar;enter;hold $$portal;put collar in $$portalbag}
-        }
-        {4}
-        {
-          {lvl}{25}
-          {zone}{amusement}
-          {name}{amulet}
-          {vnum}{29364}
-          {cmd}{get amulet from $$portalbag;hold amulet;enter;hold $$portal;put amulet in $$portalbag}}
+    {1}    
+    {      
+        {lvl}{1}
+        {zone}{sendhian}
+        {name}{922303584}
+        {vnum}{20286}
+        {cmd}{get 922303584 from $$portalbag;hold 922303584;enter;hold $$portal;put 922303584 in $$portalbag}
+    }
+    {2}
+    {
+        {lvl}{5}
+        {zone}{aylor}
+        {name}{garbage}
+        {vnum}{32418}
+        {cmd}{get garbage from $$portalbag;hold garbage;enter;hold $$portal;put garbage in $$portalbag}
+    }
+    {3}
+    {
+        {lvl}{10}
+        {zone}{petstore}
+        {name}{collar}
+        {vnum}{995}
+        {cmd}{get collar from $$portalbag;hold collar;enter;hold $$portal;put collar in $$portalbag}
+    }
+    {4}
+    {
+        {lvl}{25}
+        {zone}{amusement}
+        {name}{amulet}
+        {vnum}{29364}
+        {cmd}{get amulet from $$portalbag;hold amulet;enter;hold $$portal;put amulet in $$portalbag}}
 }
 
 #NOP    ###########################################################################
 #NOP    ### Adding/Clearing Portal List
 #NOP    ###########################################################################
-
-#alias addportals
-{
-    #foreach {$portals[]} {x}
-    {
-        #map dig {$portals[$x][cmd]} {$portals[$x][vnum]}
-    }
-}
 
 #alias clearportals
 {
@@ -82,6 +74,146 @@
         }
     }
 
+}
+
+#alias addrecalls
+{
+        #map get {roomnote} {checkrecall};
+        #if {"$checkrecall" == ""}
+        {
+                #unvar checkrecall;
+        };
+        #nop If the room is recallable (roomnote != 2 or 3);
+        #if {$checkrecall != 2 && $checkrecall != 3}
+        {
+                #var recallused 1;
+                #map dig {home} 45584
+        }
+}
+
+
+#alias clearrecalls
+{
+        #var recallused 0;
+        #nop Leave the home exit at aylor recall;
+        #if {$GMCP[ROOM][INFO][num] != 32418}
+        {
+                #map unlink {home};
+        }
+}
+
+/* Uncomment for mv/nv functionality (like room matching)
+#ALIAS  mv
+{
+    #unvar {like_rooms};
+    #map list {$GMCP[ROOM][INFO][name]} {} {} {$GMCP[ROOM][INFO][zone]} {variable} {like_rooms};
+    #foreach {$like_rooms[]} {x}
+    {
+        #if {$like_rooms[$x] == "0.00"}
+        {
+            #unvar {like_rooms[$x]};
+        };
+    };
+    #IF {&{like_rooms}}
+    {
+        #list {like_room_list} {create} {$like_rooms};
+        #SHOW $like_rooms
+    }
+
+}
+
+#ALIAS  {nv}
+{
+    #IF {&{like_room_list[]}}
+    {
+        vfind $like_room_list[1];
+        #list {like_room_list} del {2};
+        #list like_room_list del {1};
+    };
+    #ELSE
+    {
+        #show <069>[<179>No Rooms.<099> Use '<179>mv<099>' first.<069>]<099>
+    }
+}
+*/
+
+
+#nop    ###########################################################################
+#nop    ### Watching for no-portal/no-recall rooms and subs for roomnote values
+#nop    ###########################################################################
+
+#action {^Magic walls bounce you back.$}
+{
+        #map get {roomnote} {bounce_check_note};
+        #if {"$bounce_check_note" == ""}
+        {
+                #map set {roomnote} {1};
+                #echo {Roomnote was blank. Making 1};
+        };
+        #elseIF {$bounce_check_note == 0}
+        {
+                #map set {roomnote} {1};
+                #echo {Roomnote was 0. Making 1};
+        };
+        #elseIF {$bounce_check_note == 1}
+        {
+                #echo {Roomnote already 1.}
+        };
+        #elseIF {$bounce_check_note == 2}
+        {
+                #map set {roomnote} {3};
+                #echo {Roomnote was 2. Making 3};
+        };
+        #elseIF {$bounce_check_note == 3}
+        {
+                #echo {Roomnote already 3.}
+        };
+        #else
+        {
+                #echo {Roonote is something weird!};
+	};
+        #NOP Add this in when pathwalk is implemented #if {$pathwalking}
+        {
+                rpof;
+                #var {pathwalking} {1}
+        }
+}
+
+#action {^You cannot recall from this room.$}
+{
+        #map get {roomnote} {norecall_check_note};
+        #if {"$norecall_check_note" == ""}
+        {
+                #map set {roomnote} {2};
+                #echo {Roomnote was blank. Making 2};
+        };
+        #elseIF {$norecall_check_note == 0}
+        {
+                #map set {roomnote} {2};
+                #echo {Roomnote was 0. Making 2};
+        };
+        #elseIF {$norecall_check_note == 1}
+        {
+                #map set {roomnote} {3}
+                #echo {Roomnote was 1. Making 3.}
+        };
+        #elseIF {$norecall_check_note == 2}
+        {
+                #echo {Roomnote was alread 2.};
+        };
+        #elseIF {$norecall_check_note == 3}
+        {
+                #echo {Roomnote already 3.}
+        };
+        #else
+        {
+                #echo {Roomnote is something weird!};
+        };
+        #NOP Add this back in when pathwaking implmeneted #if {$pathwalking}
+        {
+                rpof;
+                #var {pathwalking} {1}
+        }
 }
 
 
