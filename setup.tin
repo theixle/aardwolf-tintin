@@ -14,7 +14,7 @@
 #READ {$dir/ticking.tin}
 #READ {$dir/quest.tin}
 
-#MAP READ {map-all.tt}				# Once you have a map file, you will read it in here
+#MAP READ {$dir/map-all.tt}				# Once you have a map file, you will read it in here
 
 #LOG APPEND {$dir/active_log.raw}
 
