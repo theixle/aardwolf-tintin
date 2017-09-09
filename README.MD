@@ -3,6 +3,7 @@
 <b>Requires</b>:<br>
 <a href='http://tintin.sourceforge.net'>Tintin 2.00.7</a><br>
 <a href='http://www.aardwolf.com/'>Aardwolf MUD</a><br>
+Bash<br>
 <b>Recommended</b>:<br>
 <a href='http://tmux.sourceforge.net'>Tmux 1.5</a> (or some comparable program).<br>
 <br>
