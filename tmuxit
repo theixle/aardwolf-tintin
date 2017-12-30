@@ -3,7 +3,7 @@
 # This is a Tmux script that handles starting up tintin with all of the Aardwolf settings.
 # You will need to change the -x <column> and -y <row> size
 # Also change "/home/adam/tt/aard" to whatever directory you use for the settings.
-# Requires Tmux 1.5 - See http://theixle.dyndns.org for a download link.
+# Requires Tmux 1.5
 
 DIR="/home/adam/tt/aard"
 
