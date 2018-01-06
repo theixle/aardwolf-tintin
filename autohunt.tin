@@ -1,0 +1,42 @@
+#class autohunt kill
+#class autohunt open
+
+#ALIAS {^autohunt %*} {#VAR autohunt {1};#VAR hunt_target {%1};hunt $hunt_target}
+#ALIAS {^aotuhuntoff$} {#var autohunt {0}}                                               
+
+#ACTION {^You are confident that %* passed through here, heading %2.}                                                                                     
+{                                                                                                                                                         
+    #IF {$autohunt}                                                                                                                                       
+    {                                                                                                                                                     
+        %2;                                                                                                                                               
+        #SHOW <069>Autohunting>>><099>;                                                                                                                   
+        #if {$GMCP[CHAR][STATUS][state] !=8} {hunt $hunt_target};                                                                                         
+    }                                                                                                                                                     
+}                                                                                                                                                         
+                                                                                                                                                          
+#ACTION {^You are certain that %* is %2 from here.}                                                                                                       
+{                                                                                                                                                         
+    #IF {$autohunt}                                                                                                                                       
+    {                                                                                                                                                     
+        %2;                                                                                                                                               
+        #SHOW <069>Autohunting>>><099>;                                                                                                                   
+        #if {$GMCP[CHAR][STATUS][state] !=8} {hunt $hunt_target};                                                                                         
+    }                                                                                                                                                     
+}                                                                                                                                                         
+                                                                                                                                                          
+#ACTION {^Not while you are fighting!$}                                                                                                                   
+{                                                                                                                                                         
+    #IF {$autohunt}                                                                                                                                       
+    {                                                                                                                                                     
+        #TICKER {autohunt_statewatch}                                                                                                                     
+        {                                                                                                                                                 
+            #IF {$GMCP[CHAR][STATUS][state] != 8}                                                                                                         
+            {                                                                                                                                             
+                hunt $hunt_target;                                                                                                                        
+                #unticker autohunt_statewatch                                                                                                             
+            }                                                                                                                                             
+        } {1}                                                                                                                                             
+    }                                                                                                                                                     
+}
+
+#class autohunt close
