@@ -40,6 +40,10 @@ Channels:
  'tags channels on' to show tags around them
   -adjust general.tin list to change which channels are gagged
 
+Spells:
+ 'tags spellups on' should be all you need to do for most spells.
+  Edit spellup.tin to configure clan skill support.
+
 Mobs/Players in the room:
  'tags roomchars on' to start capturing people/mobs to the file 'chars'
 
