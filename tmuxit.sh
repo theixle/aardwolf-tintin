@@ -8,20 +8,29 @@
 # Requires Tmux 1.5
 
 # Screen Size
-SIZE[X]="$(tput cols)"
-SIZE[Y]="$(tput lines)"
+#TODO: Validate Screen Size
+# Test the minimum useable screen size and hard code it
+X="$(tput cols)"
+Y="$(tput lines)"
 # Session Name
 SESSION="aardwolf"
-# Screen Splitting Ratios
-# TODO: More Detail
-SPL1=0.82
-SPL2=0.79
-SPL3=0.28
+# Screen Splitting percentages
+# TODO: More Detail?
+SPL1=82
+SPL2=79
+SPL3=28
+SPL4=34
+SPL5=50
+SPL6=30
 # tintin++ executable. I don't know why you'd want to change this.
 EXE="tt++"
 # Files
 CHAT="Aardwolf-chats"
 CHARS="chars"
+MAP="minimap"
+GRP="group"
+QST="quest"
+SETUP="setup.tin"
 
 # Validated Dir Name
 if [ "$1" = "" ]
@@ -29,47 +38,37 @@ then
   DIR="."
 else
   if [ -d "$1" ]
-  then
+	then
     DIR="$1"
   else
-    echo "Given directory does not exist!"
+    printf "Given directory does not exist!\n"
     exit -1
   fi
 fi
 DIR="$(readlink -f $DIR)"
 
-# Helper Functions
-fmultiply(){
-  bc -l <<< "$1*$2"
-}
+# Check for existing session
+printf "Looking for existing session : "
+$(tmux has -t $SESSION)
+if [ $? == 0 ]
+then
+  printf "Session already exists. Attaching to previous session.\n"
+	tmux a -d -t $SESSION
+	exit
+fi
 
-trunc(){
-  echo ${1%.*}
-}
-
-tmux kill-session -t $SESSION
-tmux new-session -d -s aardwolf -x $X -y $Y
-#tmux splitw -h -l 159 "tail -fs .1 $DIR/Aardwolf-chats"
-#tmux splitw -v -l 37 "tt++ -G $DIR/setup.tin;bash -i"
-#tmux splitw -h -l 68 "tail -fs .1 $DIR/chars"
-#tmux selectp -t 0
-#tmux splitw -v -l 22 "tail -fs .1 $DIR/minimap"
-#tmux selectp -t 0
-#tmux splitw -v -l 14 "tail -fs .1 $DIR/group"
-#tmux selectp -t 5
-#tmux splitw -v -l 20 "tail -fs .1 $DIR/quest"
-#tmux selectp -t 4
-#tmux attach-session -t aardwolf
-
-
-#TODO: Validate Screen Size
-# Test the minimum useable screen size and hard code it
-
-#tmux kill-session -t $SES_NAME
-#tmux new-session -d -s $SES_NAME -x $X -y $Y
-#tmux split-window -h -l $(trunc $(fmultiply $X $SPL1)) "tail -fs .1 $DIR/$CHAT"
-#tmux split-window -v -l $(trunc $(fmultiply $Y $SPL2)) "$EXE"
-#tmux split-window -h -l $(trunc $(fmultiply $X $SPL3)) "tail -fs .1 $DIR/$CHARS"
-echo $X $(tput cols)
-echo $Y $(tput lines)
-#tmux attach-session -t $SES_NAME
+# Setup tiled window view
+tmux new -d -s $SESSION -x $X -y $Y
+tmux splitw -h -p $SPL1 "tail -fs .1 $DIR/$CHAT"
+tmux splitw -v -p $SPL2 "$EXE -G $DIR/$SETUP; bash -i"
+tmux splitw -h -p $SPL3 "tail -fs .1 $DIR/$CHARS"
+tmux selectp -t 0
+tmux splitw -v -p $SPL4 "tail -fs .1 $DIR/$MAP"
+tmux selectp -t 0
+tmux send-keys 'printf "tmux kill-session $SESSION - to exit"' Enter
+tmux send-keys 'printf "ctrl-b d" to detatch' Enter
+tmux splitw -v -p $SPL5 "tail -fs .1 $DIR/$GRP"
+tmux selectp -t 5
+tmux splitw -v -p $SPL6 "tail -fs .1 $DIR/$QST"
+tmux selectp -t 4
+tmux attach-session -t $SESSION
