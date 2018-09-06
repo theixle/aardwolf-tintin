@@ -1,8 +1,0 @@
-#CLASS {variables} OPEN
-
-#VARIABLE         {CLIENT_NAME} {Aardwolf-Tintin}
-#VARIABLE         {CLIENT_VERSION} {1.01}
-#VARIABLE         {prompt}  {<120>100.00 HP <150>| <140>100.00 MANA <150>| <188><838>100.00 MV<099>}
-#VARIABLE         {repchan}  {gt}
-
-#CLASS {variables} CLOSE
