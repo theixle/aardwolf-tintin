@@ -2,21 +2,21 @@
 #VARIABLE {password} {};			# Character password
 #VARIABLE {dir} {.};				# Directory of setings, without '/' or '~' (Ex. /home/user/aardwolf, not ~/aardwolf )
 
-#READ {$dir/gmcp.tin};
+#READ {$dir/modules/gmcp.tin};
 
 #SESSION {aard} {aardmud.org} {4000};
 
-#READ {$dir/variables.tin}
-#READ {$dir/spellup.tin}
-#READ {$dir/zzGMCP_to_stat.tin}
-#READ {$dir/general.tin}
-#READ {$dir/map.tin}
-#READ {$dir/ticking.tin}
-#READ {$dir/quest.tin}
+#READ {$dir/config/variables.tin}
+#READ {$dir/modules/spellup.tin}
+#READ {$dir/modules/zzGMCP_to_stat.tin}
+#READ {$dir/modules/general.tin}
+#READ {$dir/modules/map.tin}
+#READ {$dir/modules/ticking.tin}
+#READ {$dir/modules/quest.tin}
 
-#MAP READ {$dir/map-all.tt}				# Once you have a map file, you will read it in here
+#MAP READ {$dir/map/map-all.tt}				# Once you have a map file, you will read it in here
 
-#LOG APPEND {$dir/active_log.raw}
+#LOG APPEND {$dir/log/active_log.raw}
 
 #VARIABLE {mapping} {1}
 #VARIABLE {showmap} {0}

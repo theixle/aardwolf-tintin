@@ -1,0 +1,78 @@
+#NOP	#######################
+#NOP	### Channel Gagging ###
+#NOP	#######################
+#NOP	/* All channels turned on will be logged to a file. */
+#NOP	/* This section is just for the display in Tintin. */
+
+#NOP	/* Select which channels to gag from Tintin */
+#ACTION {^\{chan ch={answer|question|wangrp|gossip|barter|auction|mxit|nobletalk|sports|gclan}\}%2$} {#line gag}
+
+#NOP	/* Remove the tags from stuff we don't gag */
+#SUB 	{\{chan ch=%*\}} {}
+
+#NOP	#######################
+#NOP	### Door Opening & Mapping ###
+#NOP	#######################
+
+#NOP	/* Using these aliases when creating the exits for rooms will enable door opening */
+#ALIAS  {op} {#map exit {%0} command {#send {op %0};%0};#send {open %0}} 
+#alias  {ope} {op e;e;close w}
+#alias  {opw} {op w;w;close e}
+#alias  {opn} {op n;n;close s}
+#alias  {ops} {op s;s;close n}
+#alias  {opu} {op u;u;close d}
+#alias  {opd} {op d;d;close u}
+
+#NOP	#######################
+#nop	### Misc Aliases ###
+#NOP	#######################
+/* Example aliases, uncomment to use */
+/*
+#alias cl {close}
+#alias df {drink fountain}
+#alias gac {get all corpse}
+#alias h  {qq '$healpot'}
+#alias hs {cast 'psychic healing'}
+#alias j {scan}
+#alias lic {look in corpse}
+#alias m meditate
+#alias pe {qq 'light allegiance'}
+#alias qq {get %0 from $potbag;quaff %0}
+#alias wr {$word}
+#alias wc {wr;#delay 1 {qc}}
+*/
+
+#NOP	#######################
+#nop	### Misc Actions ###
+#NOP	#######################
+#ACTION {The quest will start in} {#bell}
+
+#macro {\e[11~} {!}
+
+#CONFIG           {256 COLORS}  {ON}
+#CONFIG           {AUTO TAB}  {5000}
+#CONFIG           {BUFFER SIZE}  {20000}
+#CONFIG           {CHARSET}  {ASCII}
+#CONFIG           {COMMAND COLOR}  {<099>}
+#CONFIG           {COMMAND ECHO}  {ON}
+#CONFIG           {CONNECT RETRY}  {15}
+#CONFIG           {HISTORY SIZE}  {9999}
+#CONFIG           {LOG}  {RAW}
+#CONFIG           {PACKET PATCH}  {0.00}
+#CONFIG           {REPEAT CHAR}  {!}
+#CONFIG           {REPEAT ENTER}  {ON}
+#CONFIG           {SCROLL LOCK}  {ON}
+#CONFIG           {SPEEDWALK}  {ON}
+#CONFIG           {TINTIN CHAR}  {#}
+#CONFIG           {VERBATIM}  {OFF}
+#CONFIG           {VERBATIM CHAR}  {\}
+#CONFIG           {VERBOSE}  {OFF}
+#CONFIG           {WORDWRAP}  {ON}
+#PATHDIR          {d}  {u}  {32}
+#PATHDIR          {e}  {w}  {2}
+#PATHDIR          {n}  {s}  {1}
+#PATHDIR          {s}  {n}  {4}
+#PATHDIR          {u}  {d}  {16}
+#PATHDIR          {w}  {e}  {8}
+#TICKER           {mapupdate}  {#map write {$dir/map/map-all.tt}}     {300}
+#TICKER 	  {varupdate}  {#class variables write {$dir/conf/variables.tin}} {300}
