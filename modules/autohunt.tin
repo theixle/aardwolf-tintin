@@ -2,7 +2,7 @@
 #class autohunt open
 
 #ALIAS {^autohunt %*} {#VAR autohunt {1};#VAR hunt_target {%1};hunt $hunt_target}
-#ALIAS {^aotuhuntoff$} {#var autohunt {0}}                                               
+#ALIAS {^autohuntoff$} {#var autohunt {0}}                                               
 
 #ACTION {^You are confident that %* passed through here, heading %2.}                                                                                     
 {                                                                                                                                                         
