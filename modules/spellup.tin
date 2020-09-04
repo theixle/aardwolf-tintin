@@ -1,7 +1,7 @@
 #class spellup kill;
 #class spellup open;
 
-# Configure this part for your clan skill
+#NOP Configure this part for your clan skill
 #variable {clanskill_command} {exaltation}
 
 #ALIAS {^spup{| spup}}
@@ -10,18 +10,18 @@
 	#send {spellup learned};
 }
 
-# Configure these actions to catch clan skill turning on and off
-#ACTION {^{Familiar words are whispered into your ear, Athena's power floods your veins.|You've already summoned the powers of Athena.}}                  
-{                                                                                                                                                         
-    #var {clanskill} {1};                                                                                                                                
-}                                                                                                                                                         
-                                                                                                                                                          
-#ACTION {^The green glow dims as the air around you falls still.}                                                                                         
-{                                                                                                                                                         
-    #var {clanskill} {0};                                                                                                                                
+#NOP Configure these actions to catch clan skill turning on and off
+#ACTION {^{Familiar words are whispered into your ear, Athena's power floods your veins.|You've already summoned the powers of Athena.}}
+{
+    #var {clanskill} {1};
 }
 
-# Catch spell tag data
+#ACTION {^The green glow dims as the air around you falls still.}
+{
+    #var {clanskill} {0};
+}
+
+#NOP Catch spell tag data
 #ACTION {^%d,%2,%d,%d,%d,%6,%d$}
 {
 	#if {%3 == 2 || %3 == 3}
@@ -128,7 +128,7 @@
 					{
 						#if {"$position" == "Standing"}
 						{
-							#line gag
+							#line gag;
 							#send {cast %1}
 						}
 					}

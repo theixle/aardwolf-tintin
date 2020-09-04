@@ -16,17 +16,17 @@
 {
         #IF {"%0" != ""}
         {
-                #show <069>Reminder: autoscan doesn't take arguments.<099>
+                #show <069>Reminder: autoscan doesn't take arguments.<099>;
         };
         #if {$autoscan == 0}
         {
                 #var autoscan 1;
-                #show <069>Autoscan: <129>ON<099>
+                #show <069>Autoscan: <129>ON<099>;
         };
         #ELSEIF {$autoscan == 1}
         {
                 #var autoscan 0;
-                #show <069>Autoscan: <099>Off
+                #show <069>Autoscan: <099>Off;
         };
         #ELSE
         {
@@ -37,30 +37,30 @@
 #ACTION {^<MAPSTART>$}
 {
 	#variable getmap 1;
-    #sys {echo "" > $dir/map/minimap};
-	#line gag
+    #sys {echo "" > $mapdir/minimap};
+	#line gag;
 }
 {1}
 
-#action {^\{roomchars\}} 
+#action {^\{roomchars\}}
 {
 	#var getchar 1;
 	#line gag;
-	#line log {$dir/log/chars} {------<179>[ $GMCP[ROOM][INFO][name] ]<099>}
+	#line log {$logdir/chars} {------<179>[ $GMCP[ROOM][INFO][name] ]<099>}
 }
 
-#action {^\{/roomchars\}} 
+#action {^\{/roomchars\}}
 {
 	#var getchar 0;
 	#line gag;
-	#line log {$dir/log/chars} {\n}
+	#line log {$logdir/chars} {\n}
 }
 
 #ACTION {~%0}
 {
 	#if {$getmap}
 	{
-		#line log {$dir/map/minimap} {%0};
+		#line log {$mapdir/minimap} {%0};
 		#if {!$showmap}
 		{
 			#line gag
@@ -68,9 +68,9 @@
 	};
 	#elseif {$getchar}
 	{
-		#line log {$dir/log/chars} {%0}
+		#line log {$logdir/chars} {%0};
 	}
-	
+
 }
 {9999}
 
