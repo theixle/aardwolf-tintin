@@ -210,7 +210,7 @@
 				    #map set roomcolor <178>
 			};
 
-			#foreach {$GMCP[ROOM][INFO][exits][]} {exit}
+			#foreach {*GMCP[ROOM][INFO][exits][]} {exit}
 			{
 				    #map get {roomexit} {mapresult};
 
