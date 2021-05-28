@@ -1,7 +1,7 @@
 #class spellup kill;
 #class spellup open;
 
-# Configure this part for your clan skill
+#nop Configure this part for your clan skill
 #variable {clanskill_command} {exaltation}
 
 #ALIAS {^spup{| spup}}
@@ -10,7 +10,7 @@
 	#send {spellup learned};
 }
 
-# Configure these actions to catch clan skill turning on and off
+#nop Configure these actions to catch clan skill turning on and off
 #ACTION {^{Familiar words are whispered into your ear, Athena's power floods your veins.|You've already summoned the powers of Athena.}}                  
 {                                                                                                                                                         
     #var {clanskill} {1};                                                                                                                                
@@ -21,7 +21,7 @@
     #var {clanskill} {0};                                                                                                                                
 }
 
-# Catch spell tag data
+#nop Catch spell tag data
 #ACTION {^%d,%2,%d,%d,%d,%6,%d$}
 {
 	#if {%3 == 2 || %3 == 3}

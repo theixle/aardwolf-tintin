@@ -54,7 +54,7 @@
 		#variable fighting n
 	};
 	#variable {prompt} {$prompt<099>};
-	#showme {$prompt} {2}
+	#showme {$prompt} {-3} {3}
 }
 {5}
 
