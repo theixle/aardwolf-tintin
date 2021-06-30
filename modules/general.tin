@@ -49,7 +49,7 @@
 
 #macro {\e[11~} {!}
 
-#CONFIG           {256 COLORS}  {ON}
+#nop #CONFIG           {256 COLORS}  {ON}
 #CONFIG           {AUTO TAB}  {5000}
 #CONFIG           {BUFFER SIZE}  {20000}
 #CONFIG           {CHARSET}  {ASCII}
