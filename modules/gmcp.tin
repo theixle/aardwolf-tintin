@@ -170,7 +170,7 @@
 
 #alias {^repopwatch {on|off}$}
 {
-	#if {"%1" == on"}
+	#if {"%1" == "on"}
 	{
 		#var repoptrack 1;
 	}
