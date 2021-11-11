@@ -15,7 +15,7 @@
 #NOP	#######################
 
 #NOP	/* Using these aliases when creating the exits for rooms will enable door opening */
-#ALIAS  {op} {#map exit {%0} command {#send {op %0};%0};#send {open %0}} 
+#ALIAS  {op} {#map exit {%0} command {#send {op %0};%0};#send {open %0}}
 #alias  {ope} {op e;e;close w}
 #alias  {opw} {op w;w;close e}
 #alias  {opn} {op n;n;close s}
@@ -49,9 +49,9 @@
 
 #macro {\e[11~} {!}
 
-#nop #CONFIG           {256 COLORS}  {ON}
+#CONFIG           {COLOR MODE}  {ON}
 #CONFIG           {AUTO TAB}  {5000}
-#CONFIG           {BUFFER SIZE}  {20000}
+#CONFIG           {BUFFER SIZE}  {100000}
 #CONFIG           {CHARSET}  {ASCII}
 #CONFIG           {COMMAND COLOR}  {<099>}
 #CONFIG           {COMMAND ECHO}  {ON}
@@ -74,5 +74,5 @@
 #PATHDIR          {s}  {n}  {4}
 #PATHDIR          {u}  {d}  {16}
 #PATHDIR          {w}  {e}  {8}
-#TICKER           {mapupdate}  {#map write {$dir/map/map-all.tt}}     {300}
-#TICKER 	  {varupdate}  {#class variables write {$dir/conf/variables.tin}} {300}
+#TICKER           {mapupdate}  {#map write {$mapdir/map-all.tt}}     {300}
+#TICKER           {varupdate}  {#class variables write {$confdir/variables.tin}} {300}

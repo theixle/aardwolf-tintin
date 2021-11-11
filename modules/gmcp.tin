@@ -39,8 +39,8 @@
 #event {IAC SB GMCP group IAC SE}
 {
 	#var GMCP[GROUP] {%0};
-	#sys {echo "" > $dir/log/group};
-	#foreach {$GMCP[GROUP][members][]} {gmcp_groupie}
+	#sys {echo "" > $logdir/group};
+	#foreach {*GMCP[GROUP][members][]} {gmcp_groupie}
 	{
 		#if {"gmcp_groupie_list" != ""}
 		{
@@ -60,7 +60,7 @@
 			%cTNL%c:%c$GMCP[GROUP][members][$gmcp_groupie][info][tnl] %cAlign%c:%c$GMCP[GROUP][members][$gmcp_groupie][info][align] <acc>QT<eff>: <afc>$GMCP[GROUP][members][$gmcp_groupie][info][qt]
 		} {light red} {cyan} {light black} {blue} {green} {light black} {light green} {blue} {light black} {light blue} {yellow} {light black} {light yellow} {light white} {light black} {green} {light white} {light black} {light cyan}
 	};
-    #line log {$dir/log/group} {$gmcp_groupie_list};
+    #line log {$logdir/group} {$gmcp_groupie_list};
 	#var gmcp_groupie_list {};
 }
 
@@ -118,7 +118,7 @@
 	#var {player} {$GMCP[COMM][CHATLOGGER][player]};
 	#if {"$GMCP[COMM][CHATLOGGER][chan]" != "mobsay"}
 	{
-		#line log {$dir/log/Aardwolf-chats} {$GMCP[COMM][CHATLOGGER][msg]};
+		#line log {$logdir/Aardwolf-chats} {$GMCP[COMM][CHATLOGGER][msg]};
 	};
 	#if {$debug}
 	{
@@ -170,7 +170,7 @@
 
 #alias {^repopwatch {on|off}$}
 {
-	#if {"%1" == on"}
+	#if {"%1" == "on"}
 	{
 		#var repoptrack 1;
 	}
@@ -288,9 +288,9 @@
 
 #EVENT  {SESSION DISCONNECTED}
 {
-	#map write {$dir/log/map-discon.txt};
-	#history write {$dir/log/history-discon.txt};
-	#class variables write {$dir/conf/variables.tin}
+	#map write {$logdir/map-discon.txt};
+	#history write {$logdir/history-discon.txt};
+	#class variables write {$confdir/variables.tin}
 }
 
 #EVENT	{SESSION CONNECTED}
@@ -298,7 +298,7 @@
 	$name;
     #nop If a password variable is set, send it on connect;
 	#if {&{password}} {$password};
-	#history read {$dir/log/history-discon.txt}
+	#history read {$logdir/history-discon.txt}
 }
 
 #ACTION {^############# Reconnecting to Game #############$}
