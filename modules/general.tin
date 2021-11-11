@@ -75,4 +75,4 @@
 #PATHDIR          {u}  {d}  {16}
 #PATHDIR          {w}  {e}  {8}
 #TICKER           {mapupdate}  {#map write {$mapdir/map-all.tt}}     {300}
-#TICKER 	  {varupdate}  {#class variables write {$confdir/variables.tin}} {300}
+#TICKER           {varupdate}  {#class variables write {$confdir/variables.tin}} {300}

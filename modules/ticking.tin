@@ -14,11 +14,11 @@
 		};
 		#if {$ticks < 10}
     		{
-			#show {Tick:<139> $ticks <099>QUEST: <139>$quest_timer<099> Exp:<139> $GMCP[CHAR][STATUS][tnl] <099>Align:$align} 3
+			#show {Tick:<139> $ticks <099>QUEST: <139>$quest_timer<099> Exp:<139> $GMCP[CHAR][STATUS][tnl] <099>Align:$align} {-4} 3
 		}
 		
 		{
-			#show {Tick:<139>$ticks <099>QUEST: <139>$quest_timer<099> Exp:<139> $GMCP[CHAR][STATUS][tnl] <099>Align:$align} 3
+			#show {Tick:<139>$ticks <099>QUEST: <139>$quest_timer<099> Exp:<139> $GMCP[CHAR][STATUS][tnl] <099>Align:$align} {-4} 3
 		}
 	} {1}
 }
