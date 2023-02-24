@@ -41,7 +41,8 @@
 	#format {movecolor} {%c} {light yellow};
 	#if {$hp_percent == 0.00}
 	{
-		protocol gmcp sendchar
+        #NOP This currently results in an infinite loop if character just died;
+		#NOP protocol gmcp sendchar;
 	};
 	#variable {prompt} {<120>$hp_percent HP <150>| <140>$mana_percent MANA <150>| $movecolor$moves_percent MV};
 	#if {$pos_number == 8}
@@ -57,4 +58,3 @@
 	#showme {$prompt} {-3} {3}
 }
 {5}
-
