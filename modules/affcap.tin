@@ -29,25 +29,25 @@
 	#math aff_count {$aff_count + 1}
 }
 
-#action {^You are affected by %d skills and %d spells.$}
+#action {^You are affected by %d skills and %d spell}
 {
 	#foreach $affects[] {x}
 	{
-		#if {$affects[$x][2]==0 && $affects[$x][3]<2}
+		#if {$affects[$x]$x[2]==0 && $affects[$x]$x[3]<2}
 		{
-			#line log {$logdir/affects} {<119>$affects[$x][2]:$affects[$x][3]:$affects[$x][4] : $affects[$x][1]<099>}
+			#line log {$logdir/affects} {<119>$affects[$x]$x[2]:$affects[$x]$x[3]:$affects[$x]$x[4] : $affects[$x]$x[1]<099>}
 		};
-		#elseif {$affects[$x][2]==0 && $affects[$x][3]<5}
+		#elseif {$affects[$x]$x[2]==0 && $affects[$x]$x[3]<5}
 		{
-			#line log {$logdir/affects} {<139>$affects[$x][2]:$affects[$x][3]:$affects[$x][4] : $affects[$x][1]<099>}
+			#line log {$logdir/affects} {<139>$affects[$x]$x[2]:$affects[$x]$x[3]:$affects[$x]$x[4] : $affects[$x]$x[1]<099>}
 		};
-		#elseif {$affects[$x][2]==0 && $affects[$x][3]<10}
+		#elseif {$affects[$x]$x[2]==0 && $affects[$x]$x[3]<10}
 		{
-			#line log {$logdir/affects} {<169>$affects[$x][2]:$affects[$x][3]:$affects[$x][4] : $affects[$x][1]<099>}
+			#line log {$logdir/affects} {<169>$affects[$x]$x[2]:$affects[$x]$x[3]:$affects[$x]$x[4] : $affects[$x]$x[1]<099>}
 		};
 		#else
 		{
-			#line log {$logdir/affects} {<029>$affects[$x][2]:$affects[$x][3]:$affects[$x][4] : $affects[$x][1]<099>}
+			#line log {$logdir/affects} {<029>$affects[$x]$x[2]:$affects[$x]$x[3]:$affects[$x]$x[4] : $affects[$x]$x[1]<099>}
 		}
 
 
